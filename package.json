@@ -1,0 +1,17 @@
+{
+  "name": "backendrastreiobot",
+  "version": "1.0.0",
+  "description": "Backend para chatbot de rastreio",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Vinícius Pires Chaves",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.3",
+    "mysql2": "^3.9.2"
+  }
+}
