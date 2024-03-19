@@ -1,4 +1,4 @@
-import { obterPedidoId } from "../Funcoes/DialogFlow/funcoesDialogFlow.js";
+import { obterCardPedido } from "../Funcoes/DialogFlow/funcoesDialogFlow.js";
 
 export default class DialogFlowCtrl{
 

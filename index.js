@@ -3,7 +3,7 @@ import rotaPedido from './Rotas/rotaPedido.js';
 import rotaDialogFlow from './Rotas/rotaDialogFlow.js';
 
 const porta= 5000;
-const host = '0.0.0.0';
+const host = 'localhost';
 const app = express();
 
 app.use(express.json());

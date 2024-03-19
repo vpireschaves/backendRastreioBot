@@ -12,9 +12,9 @@ export default async function conectar() {
     }
     else {
         const pool = mysql.createPool({
-            host: 'localhost',
-            user: 'root', //não é recomendado usar o super usuário
-            password: '',
+            host: '191.234.209.32',
+            user: 'testuser123478', //não é recomendado usar o super usuário
+            password: 'passw77#*A',
             port: 3306,
             database: 'loja',
             waitForConnections: true,

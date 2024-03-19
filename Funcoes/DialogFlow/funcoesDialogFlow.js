@@ -1,6 +1,10 @@
 //url de referência https://cloud.google.com/dialogflow/es/docs/integrations/dialogflow-messenger?hl=pt-br
 
-import Pedido from "../Modelo/pedidoModel.js";
+import Pedido from "../../Modelo/pedidoModel.js";
+
+export async function obterCardPedido(tipo = "custom") {
+}
+
 
 //Mensagem tem como alvo o DialogFlow Messenger
 export async function obterCardsLanches(tipo = "custom") { //tipo = "custom" ou "messenger"

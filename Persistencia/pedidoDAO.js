@@ -1,4 +1,6 @@
 import Pedido from "../Modelo/pedidoModel.js";
+import Pessoa from "../Modelo/pessoaModel.js";
+import Transportadora from "../Modelo/transportadoraModel.js";
 import conectar from "./conexao.js";
 
 export default class PedidoDAO {
@@ -64,22 +66,22 @@ export default class PedidoDAO {
         const valores = [pedidoId];
         const [registros] = await conexao.query(sql, valores);
         const pedido = new Pedido();
-        pedido.pedidoId = registros.pedidoId;
-        pedido.pedidoDataPrevista = registros.pedidoDataPrevista;
-        pedido.pedidoStatus = registros.pedidoStatus;
+        pedido.pedidoId = registros[0].pedidoId;
+        pedido.pedidoDataPrevista = registros[0].pedidoDataPrevista;
+        pedido.pedidoStatus = registros[0].pedidoStatus;
         const pessoa = new Pessoa();
-        pessoa.pessoaId = registros.pessoaId;
-        pessoa.pessoaNome = registros.pessoaNome;
-        pessoa.pessoaCPF = registros.pessoaCPF;
-        pessoa.pessoaEmail = registros.pessoaEmail;
+        pessoa.pessoaId = registros[0].pessoaId;
+        pessoa.pessoaNome = registros[0].pessoaNome;
+        pessoa.pessoaCPF = registros[0].pessoaCPF;
+        pessoa.pessoaEmail = registros[0].pessoaEmail;
         const transportadora = new Transportadora();
-        transportadora.transportadoraId = registros.transportadoraId;
-        transportadora.transportadoraNome = registros.transportadoraNome;
-        transportadora.transportadoraCNPJ = registros.transportadoraCNPJ;
-        transportadora.transportadoraLogo = registros.transportadoraLogo;
+        transportadora.transportadoraId = registros[0].transportadoraId;
+        transportadora.transportadoraNome = registros[0].transportadoraNome;
+        transportadora.transportadoraCNPJ = registros[0].transportadoraCNPJ;
+        transportadora.transportadoraLogo = registros[0].transportadoraLogo;
         pedido.pessoa = pessoa;
         pedido.transportadora = transportadora;
-
+        
         return pedido;
     }
 }

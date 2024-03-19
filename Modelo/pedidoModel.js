@@ -1,5 +1,6 @@
 import Transportadora from "./transportadoraModel.js"
 import Pessoa from "./pessoaModel.js"
+import PedidoDAO from "../Persistencia/pedidoDAO.js"
 
 export default class Pedido {
     #pedidoId
@@ -35,6 +36,26 @@ export default class Pedido {
     get transportadora() {
         return this.#transportadora
     }  
+
+    set pedidoId(pedidoId) {
+        this.#pedidoId = pedidoId
+    }
+
+    set pedidoDataPrevista(pedidoDataPrevista) {
+        this.#pedidoDataPrevista = pedidoDataPrevista
+    }
+
+    set pedidoStatus(pedidoStatus) {
+        this.#pedidoStatus = pedidoStatus
+    }
+
+    set pessoa(pessoa) {
+        this.#pessoa = pessoa
+    }
+
+    set transportadora(transportadora) {
+        this.#transportadora = transportadora
+    }
 
     toJSON() {
         return {
