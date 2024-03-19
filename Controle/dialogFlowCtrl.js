@@ -6,15 +6,16 @@ export default class DialogFlowCtrl{
         resposta.type('application/json');
         //processar intenção 'RastreioEncomenda - numero'
         const intencao = requisicao.body.queryResult.intent.displayName;
+        const pedidoId = requisicao.body.queryResult.parameters.number;
         const ambienteOrigem = requisicao.body?.originalDetectIntentRequest?.source;
-        if (intencao && intencao == 'RastreioEncomenda - numero'){
+        if (intencao && intencao == 'RastreioEncomenda - numero' && pedidoId && pedidoId > 0){ 
             let respostaDF = { fulfillmentMessages: [] };
             //deveremos construir uma resposta para essa intenção
             if (ambienteOrigem){
                 //devolver custom cards
-                obterCardsLanches('custom')
-                .then((listaCardsCustom)=>{
-                    respostaDF['fulfillmentMessages'] = listaCardsCustom;
+                obterCardsLanches('custom', pedidoId)
+                .then((CardCustom)=>{
+                    respostaDF['fulfillmentMessages'] = CardCustom;
                     resposta.json(respostaDF);
                 })
                 .catch((erro)=>{
@@ -22,8 +23,7 @@ export default class DialogFlowCtrl{
                         {
                             "text": {
                                "text":[
-                                    "Erro ao recuperar a lista de lanches:\n",
-                                    "Não foi possível extrair consultar o menu.",
+                                    "Erro ao recuperar pedido.",
                                     "Tente novamente mais tarde.",
                                     erro.message
                                ]
@@ -34,11 +34,11 @@ export default class DialogFlowCtrl{
             }
             else{
                 //devolver messenger cards
-                obterCardsLanches('messenger')
-                .then((listaCardsMessenger)=>{
+                obterCardsLanches('messenger', pedidoId)
+                .then((CardMessenger)=>{
                     respostaDF['fulfillmentMessages'] = [{
                         "payload": {
-                            "richContent": [listaCardsMessenger]
+                            "richContent": [CardMessenger]
                         }
                     }];
                     resposta.json(respostaDF);
@@ -49,9 +49,9 @@ export default class DialogFlowCtrl{
                             "richContent": [
                                 {
                                     "type":"description",
-                                    "title":"Erro ao recuperar a lista de lanches",
+                                    "title":"Erro ao recuperar pedido",
                                     "text":[
-                                        "Infelizmente não foi possível exibir o menu de lanches.",
+                                        "Infelizmente não foi possível recuperar o pedido.",
                                         erro.message
                                     ]
                                 }
