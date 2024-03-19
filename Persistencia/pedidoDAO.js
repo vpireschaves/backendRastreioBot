@@ -6,7 +6,7 @@ export default class PedidoDAO {
     async gravar(pedido) {
         if (pedido instanceof Pedido){
             const conexao = await conectar();
-            const sql = 'INSERT INTO pedido (pedidoId, pedidoDataPrevista, pedidoStatus, pessoaId, transportadoraId) VALUES (?, ?, ?, ?, ?)';
+            const sql = 'INSERT INTO `Pedido (pedidoId, pedidoDataPrevista, pedidoStatus, pessoaId, transportadoraId) VALUES (?, ?, ?, ?, ?)';
             const valores = [pedido.pedidoId, pedido.pedidoDataPrevista, pedido.pedidoStatus, pedido.pessoa.pessoaId, pedido.transportadora.transportadoraId];
             const resultado = await conexao.query(sql, valores);
             pedido.id = resultado[0].insertId;
@@ -16,7 +16,7 @@ export default class PedidoDAO {
     async atualizar(pedido) {
         if (pedido instanceof Pedido){
             const conexao = await conectar();
-            const sql = 'UPDATE pedido SET pedidoDataPrevista = ?, pedidoStatus = ?, pessoaId = ?, transportadoraId = ? WHERE pedidoId = ?';
+            const sql = 'UPDATE Pedido SET pedidoDataPrevista = ?, pedidoStatus = ?, pessoaId = ?, transportadoraId = ? WHERE pedidoId = ?';
             const valores = [pedido.pedidoDataPrevista, pedido.pedidoStatus, pedido.pessoa.pessoaId, pedido.transportadora.transportadoraId, pedido.pedidoId];
             const resultado = await conexao.query(sql, valores);
         }
@@ -25,7 +25,7 @@ export default class PedidoDAO {
     async excluir(pedido){
         if (pedido instanceof Pedido){
             const conexao = await conectar();
-            const sql = 'DELETE FROM pedido WHERE pedidoId = ?';
+            const sql = 'DELETE FROM Pedido WHERE pedidoId = ?';
             const valores = [pedido.pedidoId];
             const resultado = await conexao.query(sql, valores);
         }
@@ -33,7 +33,7 @@ export default class PedidoDAO {
 
     async consultar(){
         const conexao = await conectar();
-        const sql = 'SELECT * FROM pedido inner join pessoa on pedido.pessoaId = pessoa.pessoaId inner join transportadora on pedido.transportadoraId = transportadora.transportadoraId';
+        const sql = 'SELECT * FROM Pedido inner join Pessoa on Pedido.pessoaId = Pessoa.pessoaId inner join Transportadora on Pedido.transportadoraId = Transportadora.transportadoraId';
         const [registros] = await conexao.query(sql);
         let listaPedidos = [];
         for (const registro of registros){
@@ -60,7 +60,7 @@ export default class PedidoDAO {
 
     async consultarPorId(pedidoId){
         const conexao = await conectar();
-        const sql = 'SELECT * FROM pedido WHERE pedidoId = ?';
+        const sql = 'SELECT * FROM Pedido inner join Pessoa on Pedido.pessoaId = Pessoa.pessoaId inner join Transportadora on Pedido.transportadoraId = Transportadora.transportadoraId WHERE pedidoId = ? ';
         const valores = [pedidoId];
         const [registros] = await conexao.query(sql, valores);
         const pedido = new Pedido();
