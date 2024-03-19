@@ -44,19 +44,22 @@ export default class DialogFlowCtrl{
                     resposta.json(respostaDF);
                 })
                 .catch((erro)=>{
-                    respostaDF['fulfillmentMessages'] = {
+                    respostaDF['fulfillmentMessages'] = [{
                         "payload": {
                             "richContent": [
+                              [
                                 {
-                                    "type":"description",
-                                    "title":"Número de pedido não encontrado.",
-                                    "text":[
-                                        "Em que mais posso ajudar?"
-                                    ]
+                                  "type": "description",
+                                  "title": "Número de pedido não encontrado.",
+                                  "text": [
+                                    "Em que mais posso ajudar?"
+                                  ]
                                 }
+                              ]
                             ]
-                        }
-                    }
+                          }
+                          
+                    }]
                     resposta.json(respostaDF);
                 });  
             }
