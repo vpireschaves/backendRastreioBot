@@ -1,5 +1,3 @@
-import PedidoDAO from "../Persistencia/pedidoDAO"
-
 export default class Pedido {
     #pedidoId
     #pedidoDataPrevista
@@ -15,7 +13,27 @@ export default class Pedido {
         this.#transportadora = transportadora
     }
 
-    toJSON(){
+    get pedidoId() {
+        return this.#pedidoId
+    }
+
+    get pedidoDataPrevista() {
+        return this.#pedidoDataPrevista
+    }
+
+    get pedidoStatus() {
+        return this.#pedidoStatus
+    }
+
+    get pessoa() {
+        return this.#pessoa
+    }
+
+    get transportadora() {
+        return this.#transportadora
+    }  
+
+    toJSON() {
         return {
             pedidoId: this.#pedidoId,
             pedidoDataPrevista: this.#pedidoDataPrevista,
@@ -24,5 +42,4 @@ export default class Pedido {
             transportadora: this.#transportadora.toJSON()
         }
     }
-    
 }
