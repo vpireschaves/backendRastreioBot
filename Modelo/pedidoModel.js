@@ -1,3 +1,6 @@
+import Transportadora from "./transportadoraModel.js"
+import Pessoa from "./pessoaModel.js"
+
 export default class Pedido {
     #pedidoId
     #pedidoDataPrevista
