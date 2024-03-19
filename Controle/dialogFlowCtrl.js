@@ -23,13 +23,13 @@ export default class DialogFlowCtrl{
                         {
                             "text": {
                                "text":[
-                                    "Erro ao recuperar pedido.",
-                                    "Tente novamente mais tarde.",
-                                    erro.message
+                                    "Número de pedido não encontrado.",
+                                    "Em que mais posso ajudar?"
                                ]
                             }
                         }
                     ];
+                    resposta.json(respostaDF);
                 });
             }
             else{
@@ -49,15 +49,15 @@ export default class DialogFlowCtrl{
                             "richContent": [
                                 {
                                     "type":"description",
-                                    "title":"Erro ao recuperar pedido",
+                                    "title":"Número de pedido não encontrado.",
                                     "text":[
-                                        "Infelizmente não foi possível recuperar o pedido.",
-                                        erro.message
+                                        "Em que mais posso ajudar?"
                                     ]
                                 }
                             ]
                         }
                     }
+                    resposta.json(respostaDF);
                 });  
             }
          
