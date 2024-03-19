@@ -1,5 +1,5 @@
 import express from 'express';
-import rotaRastreio from './Rotas/rotaRastreio.js';
+import rotaPedido from './Rotas/rotaPedido.js';
 import rotaDialogFlow from './Rotas/rotaDialogFlow.js';
 
 const porta= 5000;
@@ -8,7 +8,7 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
-app.use('/rastreamento', rotaRastreio);
+app.use('/pedido', rotaPedido);
 app.use('/dialogflow', rotaDialogFlow);
 
 app.listen(porta, host, ()=>{
