@@ -56,6 +56,7 @@ export async function obterCardPedido(tipo = "custom", pedidoId) {
     const pedido = new Pedido();
     const pedidoLocalizado = await pedido.consultarPorId(pedidoId);
     const listaCards = [];
+    let card;
     if (tipo == "custom") {
         card = criarCustomCard();
         card['card']['title'] = pedidoLocalizado.pedidoStatus;
@@ -71,7 +72,8 @@ export async function obterCardPedido(tipo = "custom", pedidoId) {
         card['image']['src']['rawUrl'] = pedidoLocalizado.transportadora.transportadoraLogo;
         card['actionLink'] = "http://unoeste.br"
     }
-    return card;
+    listaCards.push(card);
+    return listaCards;
 }
 
 

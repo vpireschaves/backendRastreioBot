@@ -3,7 +3,6 @@ import { obterCardPedido } from "../Funcoes/DialogFlow/funcoesDialogFlow.js";
 export default class DialogFlowCtrl{
 
     processar(requisicao, resposta){
-        console.log(requisicao.body);
         resposta.type('application/json');
         //processar intenção 'RastreioEncomenda - numero'
         const intencao = requisicao.body.queryResult.intent.displayName;
