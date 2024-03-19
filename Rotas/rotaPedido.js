@@ -1,13 +1,11 @@
 import {Router} from 'express';
-import LancheCtrl from '../Controle/lancheCtrl.js';
+import pedidoCtrl from '../Controle/pedidoCtrl.js';
 
 const rotaPedido = Router();
-const lancheControlador = new LancheCtrl();
-rotaLanche
-.get('/', lancheControlador.consultar)
-.post('/', lancheControlador.gravar)
-.put('/', lancheControlador.atualizar)
-.patch('/', lancheControlador.atualizar)
-.delete('/', lancheControlador.excluir);
+const pedidoControlador = new pedidoCtrl();
+rotaPedido
+.get('/', pedidoControlador.consultar)
+.get('/:pedidoId', pedidoControlador.consultarPorId)
+.post('/', pedidoControlador.gravar);
 
 export default rotaPedido;

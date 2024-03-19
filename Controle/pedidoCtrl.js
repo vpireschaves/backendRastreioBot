@@ -1,32 +1,31 @@
 import Pedido from "../Modelo/pedidoModel.js";
-import Pessoa from "../Modelo/pessoaModel.js";
-import Transportadora from "../Modelo/transportadoraModel.js";
 
 export default class pedidoCtrl {
 
-    gravar(requisicao, resposta){
+
+    async gravar(requisicao, resposta){
         resposta.type('application/json');
         if (requisicao.method == "POST" && requisicao.is('application/json')){
             const dados = requisicao.body;
-            const descricao = dados.descricao;
-            const preco = dados.preco;
-            const urlImagem = dados.urlImagem;
-            const listaIngredientes = dados.listaIngredientes;
-            if (descricao && preco && urlImagem && listaIngredientes){
-                const lanche = new Lanche(0,descricao, preco, urlImagem, listaIngredientes);
-                lanche.gravar()
+            const pedidoDataPrevista = dados.pedidoDataPrevista;
+            const pedidoStatus = dados.pedidoStatus;
+            const pessoa = dados.pessoa;
+            const transportadora = dados.transportadora;
+            if (pedidoDataPrevista && pedidoStatus && pessoa && transportadora){
+                const pedido = new Pedido(0, pedidoDataPrevista, pedidoStatus, pessoa, transportadora);
+                pedido.gravar()
                 .then(()=>{
                     resposta.status(201);
                     resposta.json({
                         "status":true,
-                        "mensagem": 'Lanche gravado com sucesso!'
+                        "mensagem": 'Pedido gravado com sucesso!'
                     })
                 })
                 .catch((erro)=>{
                     resposta.status(500);
                     resposta.json({
                         "status":false,
-                        "mensagem":"Erro ao gravar o lanche" + erro.message                        
+                        "mensagem":"Erro ao gravar o pedido" + erro.message
                     });
                 });
             }
@@ -34,7 +33,7 @@ export default class pedidoCtrl {
                 resposta.status(400);
                 resposta.json({
                     "status":false,
-                    "mensagem":"Informe todos os dados dos lanche!"
+                    "mensagem":"Informe todos os dados do pedido!"
                 })
             }
         }
@@ -47,20 +46,47 @@ export default class pedidoCtrl {
         }
     }
 
-    consultar(requisicao, resposta){
+    async consultar(requisicao, resposta){
         resposta.type('application/json');
         if (requisicao.method == "GET"){
-            const lanche = new Lanche();
-            lanche.consultar()
-            .then((lanches)=>{
+            const pedido = new Pedido();
+            pedido.consultar()
+            .then((pedidos)=>{
                 resposta.status(200);
-                resposta.json(lanches);
+                resposta.json(pedidos);
             })
             .catch((erro)=>{
                 resposta.status(500);
                 resposta.json({
                     "status":false,
-                    "mensagem":"Erro ao consultar os lanches" + erro.message
+                    "mensagem":"Erro ao consultar os pedidos" + erro.message
+                })
+            })
+        }
+        else{
+            resposta.status(405);
+            resposta.json({
+                "status":false,
+                "mensagem":"Requisição inválida!"
+            });
+        }
+    }
+    
+    async consultarPorId(requisicao, resposta){
+        resposta.type('application/json');
+        if (requisicao.method == "GET"){
+            const pedido = new Pedido();
+            const pedidoId = requisicao.params.pedidoId;
+            pedido.consultarPorId(pedidoId)
+            .then((pedidos)=>{
+                resposta.status(200);
+                resposta.json(pedidos);
+            })
+            .catch((erro)=>{
+                resposta.status(500);
+                resposta.json({
+                    "status":false,
+                    "mensagem":"Erro ao consultar o pedido" + erro.message
                 })
             })
         }

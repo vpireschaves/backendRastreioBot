@@ -45,4 +45,24 @@ export default class Pedido {
             transportadora: this.#transportadora.toJSON()
         }
     }
+
+    async gravar() {
+        const pedidoDAO = new PedidoDAO();
+        return await pedidoDAO.gravar(this);        
+    }
+
+    async atualizar() {
+        const pedidoDAO = new PedidoDAO();
+        return await pedidoDAO.atualizar(this);        
+    }
+
+    async consultar() {
+        const pedidoDAO = new PedidoDAO();
+        return await pedidoDAO.consultar(this);
+    }
+
+    async consultarPorId(pedidoId) {
+        const pedidoDAO = new PedidoDAO();
+        return await pedidoDAO.consultarPorId(pedidoId);
+    }
 }

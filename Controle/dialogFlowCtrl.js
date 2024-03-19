@@ -1,13 +1,13 @@
-import { obterCardsLanches } from "../Funcoes/DialogFlow/funcoesDialogFlow.js";
+import { obterPedidoId } from "../Funcoes/DialogFlow/funcoesDialogFlow.js";
 
 export default class DialogFlowCtrl{
 
     processar(requisicao, resposta){
         resposta.type('application/json');
-        //processar intenção 'InicioAtendimento'
+        //processar intenção 'RastreioEncomenda - numero'
         const intencao = requisicao.body.queryResult.intent.displayName;
         const ambienteOrigem = requisicao.body?.originalDetectIntentRequest?.source;
-        if (intencao && intencao == 'InicioAtendimento'){
+        if (intencao && intencao == 'RastreioEncomenda - numero'){
             let respostaDF = { fulfillmentMessages: [] };
             //deveremos construir uma resposta para essa intenção
             if (ambienteOrigem){
