@@ -3,6 +3,7 @@ import { obterCardPedido } from "../Funcoes/DialogFlow/funcoesDialogFlow.js";
 export default class DialogFlowCtrl{
 
     processar(requisicao, resposta){
+        console.log(requisicao.body);
         resposta.type('application/json');
         //processar intenção 'RastreioEncomenda - numero'
         const intencao = requisicao.body.queryResult.intent.displayName;
@@ -13,7 +14,7 @@ export default class DialogFlowCtrl{
             //deveremos construir uma resposta para essa intenção
             if (ambienteOrigem){
                 //devolver custom cards
-                obterCardsLanches('custom', pedidoId)
+                obterCardPedido('custom', pedidoId)
                 .then((CardCustom)=>{
                     respostaDF['fulfillmentMessages'] = CardCustom;
                     resposta.json(respostaDF);
@@ -34,7 +35,7 @@ export default class DialogFlowCtrl{
             }
             else{
                 //devolver messenger cards
-                obterCardsLanches('messenger', pedidoId)
+                obterCardPedido('messenger', pedidoId)
                 .then((CardMessenger)=>{
                     respostaDF['fulfillmentMessages'] = [{
                         "payload": {
